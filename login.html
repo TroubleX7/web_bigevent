@@ -20,7 +20,7 @@
     <div class="loginAndRegBox">
         <div class="title-box"></div>
 
-        <!-- 注册盒子 -->
+        <!-- 登录盒子 -->
         <div class="login-box">
             <form class="layui-form" action="">
 
@@ -34,7 +34,7 @@
                 <!-- 密码 表单 -->
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required" placeholder="请输入密码"
+                    <input type="text" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
                         autocomplete="off" class="layui-input">
                 </div>
 
@@ -51,9 +51,9 @@
             </form>
         </div>
 
-        <!-- 登录盒子 -->
+        <!-- 注册盒子 -->
         <div class="reg-box">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="" id="form_">
 
                 <!-- 用户名 表单 -->
                 <div class="layui-form-item">
@@ -65,13 +65,13 @@
                 <!-- 密码 表单 -->
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required" placeholder="请输入密码"
+                    <input type="text" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
                         autocomplete="off" class="layui-input">
                 </div>
                 <!-- 再次确认密码 表单 -->
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required" placeholder="确认密码"
+                    <input type="text" name="password" required lay-verify="required|pwd|repwd" placeholder="确认密码"
                         autocomplete="off" class="layui-input">
                 </div>
 
@@ -89,6 +89,8 @@
 
         </div>
 
+        <!-- 导入Layui 的JS文件 -->
+        <script src="./assets/lib/layui/layui.all.js"></script>
         <!-- 引入jQ脚本 -->
         <script src="./assets/lib/jquery.js"></script>
         <!-- 引入自己的jQ脚本 -->

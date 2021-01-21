@@ -22,7 +22,7 @@
 
         <!-- 登录盒子 -->
         <div class="login-box">
-            <form class="layui-form" action="">
+            <form class="layui-form" action="" id="form__">
 
                 <!-- 用户名 表单 -->
                 <div class="layui-form-item">
@@ -34,7 +34,7 @@
                 <!-- 密码 表单 -->
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
+                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
                         autocomplete="off" class="layui-input">
                 </div>
 
@@ -59,20 +59,20 @@
                 <div class="layui-form-item">
                     <i class="layui-icon layui-icon-username"></i>
                     <input type="text" name="username" required lay-verify="required" placeholder="请输入用户名"
-                        autocomplete="off" class="layui-input">
+                        autocomplete="off" class="layui-input" id="username">
                 </div>
 
                 <!-- 密码 表单 -->
-                <div class="layui-form-item">
+                <div class=" layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
-                        autocomplete="off" class="layui-input">
+                    <input type="password" name="password" required lay-verify="required|pwd" placeholder="请输入密码"
+                        autocomplete="off" class="layui-input" id="pwd" />
                 </div>
                 <!-- 再次确认密码 表单 -->
-                <div class="layui-form-item">
+                <div class=" layui-form-item">
                     <i class="layui-icon layui-icon-password"></i>
-                    <input type="text" name="password" required lay-verify="required|pwd|repwd" placeholder="确认密码"
-                        autocomplete="off" class="layui-input">
+                    <input type="password" name="password" required lay-verify="required|pwd|repwd" placeholder="确认密码"
+                        autocomplete="off" class="layui-input" id="repwd">
                 </div>
 
                 <!-- 登录按钮 -->

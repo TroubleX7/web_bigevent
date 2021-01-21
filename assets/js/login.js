@@ -9,6 +9,7 @@ $(function () {
   })
 
   let form = layui.form;
+  let layer = layui.layer;
 
   form.verify({
 
@@ -17,41 +18,61 @@ $(function () {
 
     // 效验 两次密码 是否相同
     repwd: function (value) {
-      let pwd = $(".reg-box [name=password]").val();
+      let pwd = $(".reg-box #pwd").val();
       if (pwd != value) return alert("两次密码不一致");
     }
   })
 
+
+
   // 监听注册表单的提交事件
-  // 'http://ajax.frontend.itheima.net/api/reguser'
-  $(".reg-box").on('submit', function (e) {
+  // 'http://api-breakingnews-web.itheima.net/reguser'
+  // 'http://api-breakingnews-web.itheima.net/api/login'
+  $("#form_").on('submit', function (e) {
     e.preventDefault();
     $.ajax({
       method: 'post',
-      url: 'http://ajax.frontend.itheima.net/api/reguser',
+      url: 'http://api-breakingnews-web.itheima.net/api/reguser'
+      ,
       data: {
-        username: $('#form_ [name=username]'),
-        password: $('#form_ [name=password]')
+        username: $('#form_ [name=username]').val(),
+        password: $('#form_ #repwd').val()
       },
       success: function (res) {
         if (res.status != 0) {
-          return layui.msg(res.message);
+          return layer.msg(res.message)
+          // return alert(res.message);
         }
-        layui.msg('注册成功，请登录！')
+        layer.msg('注册成功', {
+          icon: 1
+        }, function () {
+          $("#login_").click();
+        })
       }
-
     })
   })
 
-  // $(".reg-box").on('submit', function (e) {
-  //   e.preventDefault();
-  //   $.post('http://ajax.frontend.itheima.net/api/reguser',
-  //     {
-  //       username: $("#form_ [name=username]").val(),
-  //       password: $("$form_ [name=password]").val()
-  //     },
-  //     function (res) { console.log(res) }
-  //   )
-  // })
+  $("#form__").on('submit', function (e) {
+    e.preventDafault();
+    $.ajax({
+      method: 'POST',
+      url: 'http://api-breakingnews-web.itheima.net/api/login',
+      data: $(this).serialize(),
+      success: function (res) {
+        if (res.status != 0) {
+          return layer.msg('登录失败')
+        }
+        layer.msg('登录成功',
+          { icon: 1 },
+          function () {
+            localStorage.setItem('token', res.token),
+              location.href = "/index.html"
+
+          }
+        )
+      }
+    })
+
+  })
 
 })

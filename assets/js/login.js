@@ -18,8 +18,8 @@ $(function () {
 
     // 效验 两次密码 是否相同
     repwd: function (value) {
-      let pwd = $(".reg-box #pwd").val();
-      if (pwd != value) return alert("两次密码不一致");
+      let pwd = $(".reg-box [name=password]").val();
+      if (pwd != value) return "两次密码不一致";
     }
   })
 
@@ -31,14 +31,14 @@ $(function () {
   $("#form_").on('submit', function (e) {
     e.preventDefault();
     $.ajax({
-      method: 'post',
-      url: 'http://api-breakingnews-web.itheima.net/api/reguser'
-      ,
+      method: 'POST',
+      url: '/api/reguser',
       data: {
         username: $('#form_ [name=username]').val(),
-        password: $('#form_ #repwd').val()
+        password: $('#form_ [name=password]').val()
       },
       success: function (res) {
+        console.log(res);
         if (res.status != 0) {
           return layer.msg(res.message)
           // return alert(res.message);
@@ -52,24 +52,21 @@ $(function () {
     })
   })
 
-  $("#form__").on('submit', function (e) {
-    e.preventDafault();
+  $("#form__").submit(function (e) {
+    console.log(111);
+    e.preventDefault();
     $.ajax({
       method: 'POST',
-      url: 'http://api-breakingnews-web.itheima.net/api/login',
+      url: '/api/login',
       data: $(this).serialize(),
       success: function (res) {
         if (res.status != 0) {
           return layer.msg('登录失败')
         }
-        layer.msg('登录成功',
-          { icon: 1 },
-          function () {
-            localStorage.setItem('token', res.token),
-              location.href = "/index.html"
+        layer.msg('登录成功')
+        localStorage.setItem('token', res.token)
 
-          }
-        )
+        // location.href = "/index.html"
       }
     })
 

@@ -7,9 +7,9 @@ $(function () {
     $('.login-box').show();
     $('.reg-box').hide();
   })
-
   let form = layui.form;
-  let layer = layui.layer;
+  let layer = layui.layer
+
 
   form.verify({
 
@@ -19,41 +19,30 @@ $(function () {
     // 效验 两次密码 是否相同
     repwd: function (value) {
       let pwd = $(".reg-box [name=password]").val();
-      if (pwd != value) return "两次密码不一致";
+      if (pwd !== value) return "两次密码不一致";
     }
   })
-
-
 
   // 监听注册表单的提交事件
   // 'http://api-breakingnews-web.itheima.net/reguser'
   // 'http://api-breakingnews-web.itheima.net/api/login'
+
   $("#form_").on('submit', function (e) {
     e.preventDefault();
-    $.ajax({
-      method: 'POST',
-      url: '/api/reguser',
-      data: {
-        username: $('#form_ [name=username]').val(),
-        password: $('#form_ [name=password]').val()
-      },
-      success: function (res) {
-        console.log(res);
-        if (res.status != 0) {
-          return layer.msg(res.message)
-          // return alert(res.message);
-        }
-        layer.msg('注册成功', {
-          icon: 1
-        }, function () {
-          $("#login_").click();
-        })
+    let data = {
+      username: $("#form_ [name=username]").val(),
+      password: $("#form_ [name=password]").val()
+    }
+    $.post('/api/reguser', data, function (res) {
+      if (res.status !== 0) {
+        return layer.msg(res.message)
       }
+      layer.msg('注册成功')
+      $('#login_').click()
     })
   })
 
   $("#form__").submit(function (e) {
-    console.log(111);
     e.preventDefault();
     $.ajax({
       method: 'POST',
@@ -66,7 +55,7 @@ $(function () {
         layer.msg('登录成功')
         localStorage.setItem('token', res.token)
 
-        // location.href = "/index.html"
+        location.href = "/index.html"
       }
     })
 
